@@ -1,0 +1,14 @@
+x = open('notas.txt')
+cred = []
+nota = []
+cr = 0
+sumcred = 0
+for line in x:
+    a = line.split(" ")
+    cred += [int(a[0])]
+    nota += [float(a[1])]
+for i in cred:
+    sumcred += sum([i])
+for i in range(len(cred)):
+    cr += cred[i]*nota[i]
+print("O seu coeficiente de rendimento acumulado (CR) é igual a:",(round((cr/sumcred),2)))
