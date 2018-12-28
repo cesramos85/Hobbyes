@@ -1,14 +1,32 @@
-x = open('notas.txt')
+x = open('carto.txt')
 cred = []
 nota = []
+sit = []
 cr = 0
 sumcred = 0
+totcred = 244 #Total de créditos do curso.
+aux = 0
 for line in x:
     a = line.split(" ")
     cred += [int(a[0])]
     nota += [float(a[1])]
-for i in cred:
-    sumcred += sum([i])
+    sit += [(a[2])]
+for i in range(len(nota)):
+    sit[i] = sit[i].strip()
+    if sit[i] not in {"Isento"}:
+        sumcred += (cred[i]) #Calcula o somatório dos créditos cursados até o momento.
+for i in range(len(nota)):
+    sit[i] = sit[i].strip()
+    if sit[i] in {"aprovado", "Isento"}:
+        aux += (cred[i]) #Calcula o somatório dos créditos nas matérias onde se obteve aprovação ou isenção.
 for i in range(len(cred)):
-    cr += cred[i]*nota[i]
+    sit[i] = sit[i].strip()
+    if sit[i] not in {"Isento"}:
+        cr += cred[i]*nota[i] #Faz a multiplicação da nota obtida em cada disciplina pela quantidade de créditos (desconsidera isenções).
 print("O seu coeficiente de rendimento acumulado (CR) é igual a:",(round((cr/sumcred),2)))
+print("O total de créditos do seu curso é de:",totcred,"créditos")
+print("O total de créditos cursados até o momento é de:",aux,"créditos")
+b = aux/totcred #Calcula o percentual concluído do curso.
+print("O percentual concluído até o momento é de:",(round((b*100),2)),"%")
+if b == 1:
+    print("Parabéns, você concluiu o seu curso!")
